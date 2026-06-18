@@ -80,6 +80,7 @@ Yönetim panelinin gösterge tablosunda, yapay zeka asistanına ayrılmış bir 
 |------|-------------------|-----|
 | Yemek tarifi önerisi | OpenAI · gpt-3.5-turbo | Üretken metin |
 | Mesaja otomatik yanıt | OpenAI · gpt-3.5-turbo | Üretken metin |
+| Dinamik Dashboard Chart | OpenAI · gpt-4.o-mini | Üretken metin |
 | Akan sohbet asistanı | OpenAI · gpt-3.5-turbo (stream) | Üretken metin (SignalR) |
 | Dil çevirisi (TR→EN) | Hugging Face · Helsinki-NLP/opus-mt-tr-en | Çeviri |
 | Toksiklik denetimi | Hugging Face · unitary/toxic-bert | Sınıflandırma |
