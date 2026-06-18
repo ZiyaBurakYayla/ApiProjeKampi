@@ -2,7 +2,7 @@
 
 **Yummy**, bir restoranın hem **tanıtım web sitesini** hem de **yönetim panelini** (admin) içeren, yapay zeka destekli bir restoran yönetim sistemidir. Proje; ürün/kategori, rezervasyon, grup rezervasyonu, etkinlik, şef, galeri, müşteri yorumu, iletişim ve mesaj kutusu gibi tüm restoran operasyonlarını tek çatı altında toplar.
 
-Projenin öne çıkan tarafı, klasik CRUD işlemlerinin ötesinde **operasyonel süreçlere gömülü yapay zeka kullanımıdır**: müşteri mesajlarına otomatik yanıt üretme, gelen mesajları toksiklik açısından denetleme, malzemeye göre yemek tarifi önerme ve gerçek zamanlı akan (streaming) bir yapay zeka sohbet asistanı.
+Projenin öne çıkan tarafı, klasik CRUD işlemlerinin ötesinde **operasyonel süreçlere gömülü yapay zeka kullanımıdır**: müşteri mesajlarına otomatik yanıt üretme, gelen mesajları toksiklik açısından denetleme, malzemeye göre yemek tarifi önerme, her gün yapay zekayla üretilen dünya mutfağı menüsü ve gerçek zamanlı akan (streaming) bir yapay zeka sohbet asistanı.
 
 ---
 
@@ -69,7 +69,16 @@ Bu, projenin en dikkat çekici yapay zeka akışıdır. Ziyaretçi siteden bir m
 
 Böylece zararlı/uygunsuz mesajlar, insan müdahalesi olmadan otomatik olarak etiketlenir ve önceliklendirilir.
 
-### 5) 🧠 Dashboard AI Paneli (Claude AI)
+### 5) 🍱 AI Günlük Menü Önerisi — Dünya Mutfakları (Yapısal JSON)
+**Model:** OpenAI `gpt-4.1-mini` · **Konum:** `_DashboardAIDailyMenuSuggestionComponentPartial`
+
+Gösterge tablosunda, **her yüklemede yapay zeka tarafından otomatik üretilen** bir günlük menü kartı yer alır. Bileşen, OpenAI'a sıkı kurallar içeren bir prompt gönderir: verilen ülke listesinden (Türkiye, Fransa, İtalya, İspanya, Gürcistan, Yunanistan, İran, Çin…) **her seferinde 4 farklı dünya mutfağı** seçtirir, tüm içeriği Türkçe ürettirir ve **yalnızca geçerli JSON** döndürtür.
+
+Teknik açıdan dikkat çekici yanı, serbest metin yerine **yapılandırılmış (structured) çıktı** üretmesidir: dönen JSON doğrudan `List<MenuSuggestionDto>` (`Cuisine`, `CountryCode`, `MenuTitle`, `Items[]`) nesnesine deserialize edilip karta basılır — yani yapay zeka çıktısı doğrudan uygulamanın veri modeline bağlanır. Diğer üretken özellikler `gpt-3.5-turbo` kullanırken, bu bileşen daha güncel **`gpt-4.1-mini`** modelini tercih eder.
+
+> Gösterge tablosundaki **Rezervasyon Durum Grafiği** ise yapay zekayla değil, API'deki EF Core toplama sorgusuyla (`GetReservationStats`) beslenir; aylık Onaylandı / Onay Bekliyor / İptal dağılımını **Chart.js** ile çizer.
+
+### 6) 🧠 Dashboard AI Paneli (Claude AI)
 **Konum:** `_DashboardClaudeAIComponentPartial`
 
 Yönetim panelinin gösterge tablosunda, yapay zeka asistanına ayrılmış bir **Claude AI** bileşeni yer alır; yöneticinin panelden ayrılmadan yapay zekayla etkileşime geçebileceği bir alan olarak tasarlanmıştır.
@@ -80,8 +89,8 @@ Yönetim panelinin gösterge tablosunda, yapay zeka asistanına ayrılmış bir 
 |------|-------------------|-----|
 | Yemek tarifi önerisi | OpenAI · gpt-3.5-turbo | Üretken metin |
 | Mesaja otomatik yanıt | OpenAI · gpt-3.5-turbo | Üretken metin |
-| Dinamik Dashboard Chart | OpenAI · gpt-4.o-mini | Görsel Grafik |
 | Akan sohbet asistanı | OpenAI · gpt-3.5-turbo (stream) | Üretken metin (SignalR) |
+| Günlük menü önerisi (JSON) | OpenAI · gpt-4.1-mini | Yapısal üretim (structured output) |
 | Dil çevirisi (TR→EN) | Hugging Face · Helsinki-NLP/opus-mt-tr-en | Çeviri |
 | Toksiklik denetimi | Hugging Face · unitary/toxic-bert | Sınıflandırma |
 
