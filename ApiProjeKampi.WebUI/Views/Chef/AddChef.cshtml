@@ -1,0 +1,42 @@
+﻿@model CreateChefDto
+@{
+    ViewData["Title"] = "AddChef";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Yeni Şef Kaydı</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label>Şef Adı Soyadı</label>
+                                <input type="text" asp-for="NameSurname" class="form-control" placeholder="Ad Soyad giriniz..." required>
+
+                                <label class="mt-2">Unvan / Pozisyon</label>
+                                <input type="text" asp-for="Title" class="form-control" placeholder="Örn: Master Chef, Mutfak Şefi" required>
+
+                                <label class="mt-2">Kısa Biyografi</label>
+                                <textarea asp-for="Description" class="form-control" rows="3" placeholder="Şef hakkında kısa bilgi..."></textarea>
+
+                                <label class="mt-2">Fotoğraf URL</label>
+                                <input type="text" asp-for="ImageUrl" class="form-control" placeholder="Görsel bağlantısını yapıştırın...">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Şefi Kaydet
+                                </button>
+                                <a href="/Chef/ChefList/" class="btn btn-secondary">İptal</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

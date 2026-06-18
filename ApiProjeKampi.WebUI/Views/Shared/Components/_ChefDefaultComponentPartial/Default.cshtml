@@ -1,0 +1,127 @@
+@model List<ResultChefDto>
+<section id="chefs" class="chefs section">
+
+    <!-- Section Title -->
+    <div class="container section-title" data-aos="fade-up">
+        <h2>Şeflerimiz</h2>
+        <p><span>Mutfaktaki</span> <span class="description-title">Profosyonel Şeflerimiz<br></span></p>
+    </div><!-- End Section Title -->
+
+    <div class="container">
+
+        <div class="row gy-4" id="chefsRow">
+            @foreach (var item in Model)
+            {
+            <div class="col-lg-4 d-flex align-items-stretch chef-item" data-aos="fade-up" data-aos-delay="100">
+                <div class="team-member">
+                    <div class="member-img">
+                        <img src="@item.ImageUrl" class="img-fluid" alt="">
+                        <div class="social">
+                            <a href=""><i class="bi bi-twitter-x"></i></a>
+                            <a href=""><i class="bi bi-facebook"></i></a>
+                            <a href=""><i class="bi bi-instagram"></i></a>
+                            <a href=""><i class="bi bi-linkedin"></i></a>
+                        </div>
+                    </div>
+                    <div class="member-info">
+                        <h4>@item.NameSurname</h4>
+                        <span>@item.Title</span>
+                        <p>@item.Description</p>
+                    </div>
+                </div>
+            </div>
+            }
+        </div>
+
+        <nav class="mt-5" aria-label="Şef sayfalama">
+            <ul class="pagination justify-content-center" id="chefsPagination"></ul>
+        </nav>
+
+    </div>
+
+</section>
+
+<style>
+    #chefsPagination .page-link {
+        color: var(--accent-color, #ce1212);
+        cursor: pointer;
+    }
+
+    #chefsPagination .page-item.active .page-link {
+        background-color: var(--accent-color, #ce1212);
+        border-color: var(--accent-color, #ce1212);
+        color: #fff;
+    }
+
+    #chefsPagination .page-item.disabled .page-link {
+        color: #adb5bd;
+    }
+</style>
+
+<script>
+    (function () {
+        function initChefsPagination() {
+            var row = document.getElementById('chefsRow');
+            var pager = document.getElementById('chefsPagination');
+            if (!row || !pager) return;
+
+            var items = Array.prototype.slice.call(row.querySelectorAll('.chef-item'));
+            var perPage = 3;
+            var pageCount = Math.ceil(items.length / perPage);
+            var current = 1;
+
+            function showPage(p) {
+                if (p < 1) p = 1;
+                if (p > pageCount) p = pageCount;
+                current = p;
+                items.forEach(function (el, i) {
+                    var inPage = i >= (p - 1) * perPage && i < p * perPage;
+                    if (inPage) {
+                        el.style.removeProperty('display');
+                    } else {
+                        // .chef-item has Bootstrap .d-flex (display:flex !important),
+                        // so we must hide with !important to override it.
+                        el.style.setProperty('display', 'none', 'important');
+                    }
+                });
+                renderPager();
+                if (window.AOS && typeof window.AOS.refresh === 'function') window.AOS.refresh();
+            }
+
+            function makeBtn(label, page, opts) {
+                opts = opts || {};
+                var li = document.createElement('li');
+                li.className = 'page-item' + (opts.active ? ' active' : '') + (opts.disabled ? ' disabled' : '');
+                var a = document.createElement('a');
+                a.className = 'page-link';
+                a.href = 'javascript:void(0)';
+                a.innerHTML = label;
+                a.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    if (opts.disabled || opts.active) return;
+                    showPage(page);
+                });
+                li.appendChild(a);
+                return li;
+            }
+
+            function renderPager() {
+                pager.innerHTML = '';
+                if (pageCount <= 1) return;
+                pager.appendChild(makeBtn('&laquo;', current - 1, { disabled: current === 1 }));
+                for (var p = 1; p <= pageCount; p++) {
+                    pager.appendChild(makeBtn(String(p), p, { active: p === current }));
+                }
+                pager.appendChild(makeBtn('&raquo;', current + 1, { disabled: current === pageCount }));
+            }
+
+            showPage(1);
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initChefsPagination);
+        } else {
+            initChefsPagination();
+        }
+    })();
+</script>

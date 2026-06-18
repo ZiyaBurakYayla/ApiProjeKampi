@@ -1,0 +1,59 @@
+﻿@model CreateAboutDto
+@{
+    ViewData["Title"] = "AddAbout";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Yeni Hakkımda Oluştur</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <label>Başlık</label>
+                                <input type="text" asp-for="Title" class="form-control" placeholder="Başlığı giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Açıklama</label>
+                                <input type="text" asp-for="Description" class="form-control" placeholder="Açıklamayı giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Video Url</label>
+                                <input type="text" asp-for="VideoUrl" class="form-control" placeholder="Video Url'yi giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Video Cover Image Url</label>
+                                <input type="text" asp-for="VideoCoverImageUrl" class="form-control" placeholder="Video Cover Image Url'yi giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Image Url</label>
+                                <input type="text" asp-for="ImageUrl" class="form-control" placeholder="Image Url'yi giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Rezervasyon Numarası</label>
+                                <input type="text" asp-for="ReservationNumber" class="form-control" placeholder="Rezervasyon Numarasını giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Hakkımda'yı Kaydet
+                                </button>
+                                <a href="/About/AboutList/" class="btn btn-secondary">
+                                    Vazgeç / Listeye Dön
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+

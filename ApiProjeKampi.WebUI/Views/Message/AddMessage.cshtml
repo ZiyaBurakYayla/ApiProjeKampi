@@ -1,0 +1,113 @@
+@model CreateMessageDto
+@{
+    ViewData["Title"] = "AddMessage";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<style>
+    .modern-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        border: none;
+    }
+
+    .modern-card .card-header {
+        background: white;
+        border-bottom: 2px solid #f0f0f0;
+        border-radius: 15px 15px 0 0;
+    }
+
+        .modern-card .card-header h4 {
+            color: #667eea;
+            font-weight: 700;
+            margin: 0;
+        }
+
+    .modern-form label {
+        font-weight: 600;
+        color: #444;
+    }
+
+    .modern-form .form-control {
+        border-radius: 10px;
+        border: 1.5px solid #eceff4;
+        padding: .65rem .95rem;
+    }
+
+        .modern-form .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 3.5px rgba(102, 126, 234, .15);
+        }
+
+    .modern-btn {
+        padding: 0.65rem 1.4rem;
+        border-radius: 10px;
+        font-weight: 600;
+        border: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        transition: all 0.3s ease;
+        color: white;
+    }
+
+        .modern-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            color: white;
+        }
+
+    .btn-save {
+        background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    }
+
+    .btn-back {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+</style>
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <div class="card modern-card">
+                    <div class="card-header">
+                        <h4><i class="fas fa-envelope-open-text" style="margin-right:10px;"></i>Yeni Mesaj Oluştur</h4>
+                    </div>
+                    <div class="card-body modern-form">
+                        <form method="post">
+                            <input type="hidden" name="SendDate" value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm:ss")" />
+                            <input type="hidden" name="Status" value="Mesaj Alındı" />
+                            <input type="hidden" name="IsRead" value="false" />
+
+                            <div class="form-group">
+                                <label>Ad Soyad</label>
+                                <input type="text" asp-for="NameSurname" class="form-control" placeholder="Gönderen adı soyadı..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>E-posta</label>
+                                <input type="email" asp-for="Email" class="form-control" placeholder="ornek@mail.com" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Konu</label>
+                                <input type="text" asp-for="Subject" class="form-control" placeholder="Mesaj konusu..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Mesaj İçeriği</label>
+                                <textarea asp-for="MessageContent" class="form-control" rows="6" placeholder="Mesaj içeriğini yazınız..." required></textarea>
+                            </div>
+                            <div class="form-group mt-4">
+                                <button type="submit" class="modern-btn btn-save">
+                                    <i class="fas fa-save"></i> Kaydet
+                                </button>
+                                <a href="/Message/MessageList/" class="modern-btn btn-back">
+                                    <i class="fas fa-arrow-left"></i> Vazgeç / Listeye Dön
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

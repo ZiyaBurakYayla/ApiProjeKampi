@@ -1,0 +1,43 @@
+﻿@model GetWhyChooseYummyByIdDto
+@{
+    ViewData["Title"] = "UpdateWhyChooseYummy";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>WhyChooseYummy Güncelle</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="form-group">
+                                <input type="hidden" asp-for="ServiceId" />
+                                <label>Başlık</label>
+                                <input type="text" asp-for="Tite" class="form-control" placeholder="Başlığı giriniz..." required>
+                                <label>Açıklama</label>
+                                <input type="text" asp-for="Description" class="form-control" placeholder="açıklamayı giriniz..." required>
+                                <label>Icon Url</label>
+                                <input type="text" asp-for="IconUrl" class="form-control" placeholder="Icon Url'yi giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Servis Güncelle
+                                </button>
+                                <a href="/WhyChooseYummy/WhyChooseYummyList/" class="btn btn-secondary">
+                                    Vazgeç / Listeye Dön
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

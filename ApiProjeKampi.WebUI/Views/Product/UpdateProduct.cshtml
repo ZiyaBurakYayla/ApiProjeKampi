@@ -1,0 +1,54 @@
+@model GetProductByIdDto
+@{
+    ViewData["Title"] = "UpdateProduct";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Ürün Güncelle</h4>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <input type="hidden" asp-for="ProductId" />
+                            <div class="form-group">
+                                <label>Ürün Adı</label>
+                                <input type="text" asp-for="ProductName" class="form-control" placeholder="Ürün adını giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ürün Kategorisi</label>
+                                <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.v">
+                                    <option value="">Kategori Seçiniz</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Ürün Fiyatı</label>
+                                <input type="text" asp-for="Price" class="form-control" placeholder="Ürün fiyatını giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ürün görsel Url</label>
+                                <input type="text" asp-for="ImageUrl" class="form-control" placeholder="Url'yi giriniz..." required>
+                            </div>
+                            <div class="form-group">
+                                <label>Ürün Açıklama</label>
+                                <textarea class="form-control" asp-for="Description" rows="5"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i> Güncelle
+                                </button>
+                                <a href="/Product/ProductList/" class="btn btn-secondary">
+                                    Vazgeç / Listeye Dön
+                                </a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
